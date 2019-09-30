@@ -3,6 +3,7 @@ import { Location, LocationStrategy } from '@angular/common';
 import { NbThemeService } from '@nebular/theme';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { RoomService } from '../../../../services/room/room.service';
 
 @Component({
   selector: 'ngx-room-selector',
@@ -75,6 +76,7 @@ export class RoomSelectorComponent implements OnInit, OnDestroy {
     private location: Location,
     private locationStrategy: LocationStrategy,
     private themeService: NbThemeService,
+    private room: RoomService,
   ) {
     this.selectRoom('2');
   }
@@ -111,6 +113,7 @@ export class RoomSelectorComponent implements OnInit, OnDestroy {
     this.select.emit(roomNumber);
     this.selectedRoom = roomNumber;
     this.sortRooms();
+    this.room.changeRoom(roomNumber)
   }
 
   getUrlPath(id: string) {

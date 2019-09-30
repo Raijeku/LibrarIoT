@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnDestroy } from '@angular/core';
+import { Component, HostBinding, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
 import { map } from 'rxjs/operators';
 
@@ -6,14 +6,14 @@ import { map } from 'rxjs/operators';
   selector: 'ngx-rooms',
   styleUrls: ['./rooms.component.scss'],
   template: `
-    <nb-card [size]="breakpoint.width >= breakpoints.sm ? 'giant' : ''">
+    <nb-card>
       <nb-icon icon="arrow-ios-downward" pack="eva"
                (click)="collapse()"
                class="collapse"
                [hidden]="isCollapsed()">
       </nb-icon>
-      <ngx-room-selector [class.dark-background]="isDarkTheme" (select)="select($event)"></ngx-room-selector>
-      <ngx-player [collapsed]="isCollapsed() && breakpoint.width <= breakpoints.md"></ngx-player>
+      <ngx-room-selector (click)="selectRoom(selected)" [class.dark-background]="isDarkTheme" (select)="select($event)"></ngx-room-selector>
+      <!--<ngx-player [collapsed]="isCollapsed() && breakpoint.width <= breakpoints.md"></ngx-player>-->
     </nb-card>
   `,
 })
@@ -21,7 +21,9 @@ export class RoomsComponent implements OnDestroy {
 
   @HostBinding('class.expanded')
   private expanded: boolean;
-  private selected: number;
+  selected: number;
+
+  @Output() roomEvent: EventEmitter<number> = new EventEmitter<number>();
 
   isDarkTheme: boolean;
 
@@ -52,6 +54,8 @@ export class RoomsComponent implements OnDestroy {
     }
 
     this.selected = roomNumber;
+    this.roomEvent.emit(roomNumber);
+    //this.sendRoom();
   }
 
   expand() {
@@ -73,5 +77,9 @@ export class RoomsComponent implements OnDestroy {
   ngOnDestroy() {
     this.themeSubscription.unsubscribe();
     this.themeChangeSubscription.unsubscribe();
+  }
+
+  sendRoom(roomNumber){
+    this.roomEvent.emit(roomNumber);
   }
 }

@@ -1,0 +1,17 @@
+<nb-card class="cards-container">
+    <nb-card size="large" class="table-card">
+        <!--<nb-card size="large" class="chart-card">-->
+            <nb-card-header>
+                <span>Noise Levels</span>
+        
+                <nb-select [(selected)]="type"  (selectedChange)="onChange($event)">
+                    <nb-option *ngFor="let t of types" [value]="t">{{ t }}</nb-option>
+                </nb-select>
+            </nb-card-header>
+            <nb-card-body>
+            <!--<chart type="line" [data]="data" [options]="options" class="chart-js"></chart>-->
+            <div echarts [options]="options" class="echart" (chartInit)="onChartInit($event)"></div>
+        </nb-card-body>
+        <!--</nb-card>-->
+    </nb-card>
+</nb-card>

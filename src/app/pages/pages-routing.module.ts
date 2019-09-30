@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
+import { ReportComponent } from './report/report.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
@@ -11,22 +11,17 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: 'dashboard',
-      component: ECommerceComponent,
-    },
-    {
       path: 'iot-dashboard',
       component: DashboardComponent,
+    },
+    {
+      path: 'report',
+      component: ReportComponent,
     },
     {
       path: 'layout',
       loadChildren: () => import('./layout/layout.module')
         .then(m => m.LayoutModule),
-    },
-    {
-      path: 'forms',
-      loadChildren: () => import('./forms/forms.module')
-        .then(m => m.FormsModule),
     },
     {
       path: 'ui-features',
@@ -44,33 +39,8 @@ const routes: Routes = [{
         .then(m => m.ExtraComponentsModule),
     },
     {
-      path: 'maps',
-      loadChildren: () => import('./maps/maps.module')
-        .then(m => m.MapsModule),
-    },
-    {
-      path: 'charts',
-      loadChildren: () => import('./charts/charts.module')
-        .then(m => m.ChartsModule),
-    },
-    {
-      path: 'editors',
-      loadChildren: () => import('./editors/editors.module')
-        .then(m => m.EditorsModule),
-    },
-    {
-      path: 'tables',
-      loadChildren: () => import('./tables/tables.module')
-        .then(m => m.TablesModule),
-    },
-    {
-      path: 'miscellaneous',
-      loadChildren: () => import('./miscellaneous/miscellaneous.module')
-        .then(m => m.MiscellaneousModule),
-    },
-    {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'iot-dashboard',
       pathMatch: 'full',
     },
     {

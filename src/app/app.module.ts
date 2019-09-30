@@ -20,6 +20,12 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { ReportModule } from './pages/report/report.module';
+import {
+  IMqttMessage,
+  MqttModule,
+  IMqttServiceOptions
+} from 'ngx-mqtt';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +46,16 @@ import {
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
-    CoreModule.forRoot(),
+    CoreModule.forRoot(), 
+
+    ReportModule,
+    MqttModule.forRoot({
+      hostname: 'localhost',
+      protocol: 'ws',
+      port: 15675,
+      path: '/ws',
+      keepalive: 5
+  }),
   ],
   bootstrap: [AppComponent],
 })

@@ -11,6 +11,7 @@ import {
   NbIconModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ChartModule } from 'angular2-chartjs';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
@@ -30,6 +31,7 @@ import { PlayerComponent } from './rooms/player/player.component';
 import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { FormsModule } from '@angular/forms';
+import { NoiseComponent } from './noise/noise.component';
 
 @NgModule({
   imports: [
@@ -46,6 +48,7 @@ import { FormsModule } from '@angular/forms';
     NbIconModule,
     NbButtonModule,
     NgxEchartsModule,
+    ChartModule,
   ],
   declarations: [
     DashboardComponent,
@@ -64,6 +67,9 @@ import { FormsModule } from '@angular/forms';
     SolarComponent,
     TrafficComponent,
     TrafficChartComponent,
+    NoiseComponent,
   ],
+  exports: [
+  ]
 })
 export class DashboardModule { }

@@ -1,7 +1,9 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators' ;
 import { SolarData } from '../../@core/data/solar';
+
+import { RoomService } from '../../services/room/room.service';
 
 interface CardSettings {
   title: string;
@@ -14,11 +16,17 @@ interface CardSettings {
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy, OnInit {
 
   private alive = true;
+  roomNumber: number;
 
   solarValue: number;
+  powerCard: CardSettings = {
+    title: 'Recolectar Datos',
+    iconClass: 'nb-lightbulb',
+    type: 'primary',
+  };
   lightCard: CardSettings = {
     title: 'Light',
     iconClass: 'nb-lightbulb',
@@ -43,10 +51,11 @@ export class DashboardComponent implements OnDestroy {
   statusCards: string;
 
   commonStatusCardsSet: CardSettings[] = [
-    this.lightCard,
-    this.rollerShadesCard,
-    this.wirelessAudioCard,
-    this.coffeeMakerCard,
+    this.powerCard,
+    //this.lightCard,
+    //this.rollerShadesCard,
+    //this.wirelessAudioCard,
+    //this.coffeeMakerCard,
   ];
 
   statusCardsByThemes: {
@@ -79,7 +88,7 @@ export class DashboardComponent implements OnDestroy {
   };
 
   constructor(private themeService: NbThemeService,
-              private solarService: SolarData) {
+              private solarService: SolarData, private room: RoomService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -93,7 +102,15 @@ export class DashboardComponent implements OnDestroy {
       });
   }
 
+  receiveRoom(room) {
+    this.roomNumber = room;
+  }
+
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  ngOnInit() {
+    this.room.currentRoom.subscribe(roomNumber=>this.roomNumber=roomNumber)
   }
 }
