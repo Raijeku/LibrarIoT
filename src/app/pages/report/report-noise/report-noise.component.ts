@@ -40,19 +40,19 @@ export class ReportNoiseComponent implements OnInit {
         this.noiseData=noise;
         this.selectedNoiseData=noise;
         for(let noiseRegister of noise){
-          this.sumMinutes=this.sumMinutes+noiseRegister.nRuido;
-          this.sumHours=this.sumHours+noiseRegister.nRuido;
-          this.sumDays=this.sumDays+noiseRegister.nRuido;
+          this.sumMinutes=this.sumMinutes+noiseRegister.ruido;
+          this.sumHours=this.sumHours+noiseRegister.ruido;
+          this.sumDays=this.sumDays+noiseRegister.ruido;
           if(this.counter%(60/this.timeInterval)==0){
-            this.noiseDataMinutes.push(new Noise(this.sumMinutes/(60/this.timeInterval),noiseRegister.fecha));
+            //this.noiseDataMinutes.push(new Noise(this.sumMinutes/(60/this.timeInterval),noiseRegister.fecha));
             this.sumMinutes=0;
           }
           if(this.counter%(3600/this.timeInterval)==0){
-            this.noiseDataHours.push(new Noise(this.sumHours/(3600/this.timeInterval),noiseRegister.fecha));
+            //this.noiseDataHours.push(new Noise(this.sumHours/(3600/this.timeInterval),noiseRegister.fecha));
             this.sumHours=0;
           }
           if(this.counter%(86400/this.timeInterval)==0){
-            this.noiseDataDays.push(new Noise(this.sumDays/(86400/this.timeInterval),noiseRegister.fecha));
+            //this.noiseDataDays.push(new Noise(this.sumDays/(86400/this.timeInterval),noiseRegister.fecha));
             this.sumDays=0;
           }
           this.counter=this.counter+1;
@@ -122,7 +122,7 @@ export class ReportNoiseComponent implements OnInit {
           {
             name: 'Area 1',
             type: 'line',
-            data: this.selectedNoiseData.map(register=>register.nRuido),
+            data: this.selectedNoiseData.map(register=>register.ruido),
           },
         ],
       };
@@ -133,12 +133,12 @@ export class ReportNoiseComponent implements OnInit {
       this.data = {
         labels: this.noiseData.map(register=>register.fecha),
         datasets: [{
-          data: this.noiseData.map(register=>register.nRuido),
+          data: this.noiseData.map(register=>register.ruido),
           label: 'Series A',
           backgroundColor: NbColorHelper.hexToRgbA(colors.primary, 0.3),
           borderColor: colors.primary,
         }, {
-          data: [this.selectedNoiseData[0].nRuido, this.selectedNoiseData[1].nRuido, this.selectedNoiseData[2].nRuido, this.selectedNoiseData[3].nRuido, 86, 27, 90],
+          data: [this.selectedNoiseData[0].ruido, this.selectedNoiseData[1].ruido, this.selectedNoiseData[2].ruido, this.selectedNoiseData[3].ruido, 86, 27, 90],
           label: 'Series B',
           backgroundColor: NbColorHelper.hexToRgbA(colors.danger, 0.3),
           borderColor: colors.danger,
@@ -203,16 +203,16 @@ export class ReportNoiseComponent implements OnInit {
   onChange(time:any){
     
     if (time=="seconds") {
-      this.noiseDataNumbers = this.noiseData.map(register=>register.nRuido);
+      this.noiseDataNumbers = this.noiseData.map(register=>register.ruido);
       this.noiseDataDates = this.noiseData.map(register=>register.fecha);
     } else if (time=="minutes"){
-      this.noiseDataNumbers = this.noiseDataMinutes.map(register=>register.nRuido);
+      this.noiseDataNumbers = this.noiseDataMinutes.map(register=>register.ruido);
       this.noiseDataDates = this.noiseData.map(register=>register.fecha);
     } else if (time=="hours"){
-      this.noiseDataNumbers = this.noiseDataHours.map(register=>register.nRuido);
+      this.noiseDataNumbers = this.noiseDataHours.map(register=>register.ruido);
       this.noiseDataDates = this.noiseData.map(register=>register.fecha);
     } else if (time=="days"){
-      this.noiseDataNumbers = this.noiseDataDays.map(register=>register.nRuido);
+      this.noiseDataNumbers = this.noiseDataDays.map(register=>register.ruido);
       this.noiseDataDates = this.noiseData.map(register=>register.fecha);
     }
     this.echartsInstance.setOption({

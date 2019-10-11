@@ -79,6 +79,7 @@ export class ReportComponent implements OnInit {
         this.source.load(data);
       });
     }
+
   }
 
 }

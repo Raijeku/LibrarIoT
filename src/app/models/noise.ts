@@ -1,8 +1,8 @@
 export class Noise {
-    static _id: number = 0;
     id: number;
-    fecha: string;
-    nRuido: number;
+    date: string;
+    ruido: number;
 
-    constructor(public noise, public date){this.id = Noise._id++; this.nRuido=noise; this.fecha=date;}
+    constructor(public identification, public noise, public fecha){this.id = identification; this.ruido=noise; this.date=fecha;}
 }
+ 
