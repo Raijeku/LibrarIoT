@@ -58,7 +58,7 @@ export class NoiseComponent implements OnInit, OnDestroy {
         xAxis: [
           {
             type: 'category',
-            data: this.selectedNoiseData.map(register=>register.fecha),
+            data: this.selectedNoiseData.map(register=>register.date),
             axisTick: {
               alignWithLabel: true,
             },
@@ -116,7 +116,7 @@ export class NoiseComponent implements OnInit, OnDestroy {
         const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
       this.data = {
-        labels: this.noiseData.map(register=>register.fecha),
+        labels: this.noiseData.map(register=>register.date),
         datasets: [{
           data: this.noiseData.map(register=>register.ruido),
           label: 'Series A',
@@ -193,15 +193,15 @@ export class NoiseComponent implements OnInit, OnDestroy {
         this.sumHours=this.sumHours+noiseRegister.ruido;
         this.sumDays=this.sumDays+noiseRegister.ruido;
         if(this.counter%(60/this.timeInterval)==0){
-          //this.noiseDataMinutes.push(new Noise(this.sumMinutes/(60/this.timeInterval),noiseRegister.fecha));
+          //this.noiseDataMinutes.push(new Noise(this.sumMinutes/(60/this.timeInterval),noiseRegister.date));
           this.sumMinutes=0;
         }
         if(this.counter%(3600/this.timeInterval)==0){
-          //this.noiseDataHours.push(new Noise(this.sumHours/(3600/this.timeInterval),noiseRegister.fecha));
+          //this.noiseDataHours.push(new Noise(this.sumHours/(3600/this.timeInterval),noiseRegister.date));
           this.sumHours=0;
         }
         if(this.counter%(86400/this.timeInterval)==0){
-          //this.noiseDataDays.push(new Noise(this.sumDays/(86400/this.timeInterval),noiseRegister.fecha));
+          //this.noiseDataDays.push(new Noise(this.sumDays/(86400/this.timeInterval),noiseRegister.date));
           this.sumDays=0;
         }
         this.counter=this.counter+1;
@@ -213,7 +213,7 @@ export class NoiseComponent implements OnInit, OnDestroy {
       data: this.selectedNoiseData.map(register=>register.ruido),
     }],
     xAxis: [{
-      data: this.selectedNoiseData.map(register=>register.fecha),
+      data: this.selectedNoiseData.map(register=>register.date),
     }]
   });
   }
@@ -222,16 +222,16 @@ export class NoiseComponent implements OnInit, OnDestroy {
     
     if (time=="seconds") {
       this.noiseDataNumbers = this.noiseData.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     } else if (time=="minutes"){
       this.noiseDataNumbers = this.noiseDataMinutes.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     } else if (time=="hours"){
       this.noiseDataNumbers = this.noiseDataHours.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     } else if (time=="days"){
       this.noiseDataNumbers = this.noiseDataDays.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     }
     this.echartsInstance.setOption({
       series: [{
@@ -252,32 +252,32 @@ export class NoiseComponent implements OnInit, OnDestroy {
       for (let i = newLength-(60/this.timeInterval); i < newLength; i++) {
         sumMinutes+=this.noiseData[i].ruido;
       }
-      //this.noiseDataMinutes.push(new Noise(sumMinutes/(60/this.timeInterval),newNoise.fecha));
+      //this.noiseDataMinutes.push(new Noise(sumMinutes/(60/this.timeInterval),newNoise.date));
     }
     if(newLength%(3600/this.timeInterval)==0){
       for (let i = newLength-(60/this.timeInterval); i < newLength; i++) {
         sumHours+=this.noiseData[i].ruido;
       }
-      //this.noiseDataHours.push(new Noise(sumHours/(3600/this.timeInterval),newNoise.fecha));
+      //this.noiseDataHours.push(new Noise(sumHours/(3600/this.timeInterval),newNoise.date));
     }
     if(newLength%(86400/this.timeInterval)==0){
       for (let i = newLength-(60/this.timeInterval); i < newLength; i++) {
         sumDays+=this.noiseData[i].ruido;
       }
-      //this.noiseDataHours.push(new Noise(sumDays/(86400/this.timeInterval),newNoise.fecha));
+      //this.noiseDataHours.push(new Noise(sumDays/(86400/this.timeInterval),newNoise.date));
     }
     if (time=="seconds") {
       this.noiseDataNumbers = this.noiseData.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     } else if (time=="minutes"){
       this.noiseDataNumbers = this.noiseDataMinutes.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseDataMinutes.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseDataMinutes.map(register=>register.date);
     } else if (time=="hours"){
       this.noiseDataNumbers = this.noiseDataHours.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseDataHours.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseDataHours.map(register=>register.date);
     } else if (time=="days"){
       this.noiseDataNumbers = this.noiseDataDays.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseDataDays.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseDataDays.map(register=>register.date);
     }
     this.echartsInstance.setOption({
       series: [{

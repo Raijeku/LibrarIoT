@@ -44,15 +44,15 @@ export class ReportNoiseComponent implements OnInit {
           this.sumHours=this.sumHours+noiseRegister.ruido;
           this.sumDays=this.sumDays+noiseRegister.ruido;
           if(this.counter%(60/this.timeInterval)==0){
-            //this.noiseDataMinutes.push(new Noise(this.sumMinutes/(60/this.timeInterval),noiseRegister.fecha));
+            //this.noiseDataMinutes.push(new Noise(this.sumMinutes/(60/this.timeInterval),noiseRegister.date));
             this.sumMinutes=0;
           }
           if(this.counter%(3600/this.timeInterval)==0){
-            //this.noiseDataHours.push(new Noise(this.sumHours/(3600/this.timeInterval),noiseRegister.fecha));
+            //this.noiseDataHours.push(new Noise(this.sumHours/(3600/this.timeInterval),noiseRegister.date));
             this.sumHours=0;
           }
           if(this.counter%(86400/this.timeInterval)==0){
-            //this.noiseDataDays.push(new Noise(this.sumDays/(86400/this.timeInterval),noiseRegister.fecha));
+            //this.noiseDataDays.push(new Noise(this.sumDays/(86400/this.timeInterval),noiseRegister.date));
             this.sumDays=0;
           }
           this.counter=this.counter+1;
@@ -77,7 +77,7 @@ export class ReportNoiseComponent implements OnInit {
         xAxis: [
           {
             type: 'category',
-            data: this.selectedNoiseData.map(register=>register.fecha),
+            data: this.selectedNoiseData.map(register=>register.date),
             axisTick: {
               alignWithLabel: true,
             },
@@ -131,7 +131,7 @@ export class ReportNoiseComponent implements OnInit {
         const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
       this.data = {
-        labels: this.noiseData.map(register=>register.fecha),
+        labels: this.noiseData.map(register=>register.date),
         datasets: [{
           data: this.noiseData.map(register=>register.ruido),
           label: 'Series A',
@@ -204,16 +204,16 @@ export class ReportNoiseComponent implements OnInit {
     
     if (time=="seconds") {
       this.noiseDataNumbers = this.noiseData.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     } else if (time=="minutes"){
       this.noiseDataNumbers = this.noiseDataMinutes.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     } else if (time=="hours"){
       this.noiseDataNumbers = this.noiseDataHours.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     } else if (time=="days"){
       this.noiseDataNumbers = this.noiseDataDays.map(register=>register.ruido);
-      this.noiseDataDates = this.noiseData.map(register=>register.fecha);
+      this.noiseDataDates = this.noiseData.map(register=>register.date);
     }
     this.echartsInstance.setOption({
       series: [{
