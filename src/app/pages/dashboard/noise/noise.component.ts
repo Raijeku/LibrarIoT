@@ -241,6 +241,7 @@ export class NoiseComponent implements OnInit, OnDestroy {
         data: this.noiseDataDates,
       }]
     });
+    console.log(this.noiseDataNumbers);
   }
 
   addData(newNoise: Noise, time:any){
